@@ -6,7 +6,7 @@
 /*   By: amassias <amassias@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 14:27:29 by amassias          #+#    #+#             */
-/*   Updated: 2024/01/16 14:32:02 by amassias         ###   ########.fr       */
+/*   Updated: 2024/01/16 18:47:02 by amassias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ static void	_rotate(
 	if (*stack == NULL)
 		return ;
 	head = *stack;
-	head->next = NULL;
 	*stack = (*stack)->next;
+	head->next = NULL;
 	ft_lstadd_back(stack, head);
 }

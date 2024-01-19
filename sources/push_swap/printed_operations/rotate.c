@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ps_push.c                                          :+:      :+:    :+:   */
+/*   rotate.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amassias <amassias@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/16 14:11:29 by amassias          #+#    #+#             */
-/*   Updated: 2024/01/16 18:43:00 by amassias         ###   ########.fr       */
+/*   Created: 2024/01/17 19:27:55 by amassias          #+#    #+#             */
+/*   Updated: 2024/01/17 19:28:42 by amassias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /**
- * @file ps_push.c
+ * @file rotate.c
  * @author Antoine Massias (amassias@student.42lehavre.fr)
- * @date 2024-01-16
+ * @date 2024-01-17
  * @copyright Copyright (c) 2024
  */
 
@@ -23,18 +23,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
-
-/* ************************************************************************** */
-/*                                                                            */
-/* Helper protoypes                                                           */
-/*                                                                            */
-/* ************************************************************************** */
-
-static void	_push(
-				t_list **dst_ptr,
-				t_list **src_ptr
-				);
+#include "ps.h"
 
 /* ************************************************************************** */
 /*                                                                            */
@@ -42,37 +31,26 @@ static void	_push(
 /*                                                                            */
 /* ************************************************************************** */
 
-void	ps_pa(
-			t_ps_context *ctx
+void	p_ra(
+			t_ps_context *context
 			)
 {
-	_push(&ctx->a, &ctx->b);
+	ft_putstr("ra\n");
+	ps_ra(context);
 }
 
-void	ps_pb(
-			t_ps_context *ctx
+void	p_rb(
+			t_ps_context *context
 			)
 {
-	_push(&ctx->b, &ctx->a);
+	ft_putstr("rb\n");
+	ps_rb(context);
 }
 
-/* ************************************************************************** */
-/*                                                                            */
-/* Helper implementation                                                      */
-/*                                                                            */
-/* ************************************************************************** */
-
-static void	_push(
-				t_list **dst_ptr,
-				t_list **src_ptr
-				)
+void	p_rr(
+			t_ps_context *context
+			)
 {
-	t_list	*tmp;
-
-	if (*src_ptr == NULL)
-		return ;
-	tmp = *src_ptr;
-	*src_ptr = (*src_ptr)->next;
-	tmp->next = *dst_ptr;
-	*dst_ptr = tmp;
+	ft_putstr("rr\n");
+	ps_rr(context);
 }

@@ -6,15 +6,14 @@
 /*   By: amassias <amassias@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 13:01:58 by amassias          #+#    #+#             */
-/*   Updated: 2024/01/16 15:33:22 by amassias         ###   ########.fr       */
+/*   Updated: 2024/01/18 23:28:55 by amassias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "ps.h"
 
-static void	print_node(
-				void *p
-				);
+#include <limits.h>
+#include <stdbool.h>
 
 int	main(int argc, char **argv)
 {
@@ -24,15 +23,17 @@ int	main(int argc, char **argv)
 	context = ps_initialize((const char **)(argv + 1));
 	if (context == NULL)
 		return (ft_putstr_fd("Error\n", STDERR_FILENO), EXIT_FAILURE);
-	ft_printf("Success !\n");
-	ft_lstiter(context->a, print_node);
-	ps_cleanup(&context);
-	return (EXIT_SUCCESS);
-}
-
-static void	print_node(
-				void *p
-				)
-{
-	ft_printf("%d\n", *(int *)p);
+	if (context->count < 2)
+		;
+	else if (context->count == 2)
+		sort_for_2(context);
+	else if (context->count == 3)
+		sort_for_3(context);
+	else if (context->count == 4)
+		sort_for_4(context);
+	else if (context->count == 5)
+		sort_for_5(context);
+	else
+		radix_sort(context);
+	return (ps_cleanup(&context), EXIT_SUCCESS);
 }

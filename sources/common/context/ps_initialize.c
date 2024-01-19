@@ -6,7 +6,7 @@
 /*   By: amassias <amassias@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 14:38:15 by amassias          #+#    #+#             */
-/*   Updated: 2024/01/16 14:56:11 by amassias         ###   ########.fr       */
+/*   Updated: 2024/01/16 18:14:30 by amassias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,16 @@
 #include "utils.h"
 
 #include <stdlib.h>
+
+/* ************************************************************************** */
+/*                                                                            */
+/* Helper protoypes                                                           */
+/*                                                                            */
+/* ************************************************************************** */
+
+static t_ps_context	*_normalize(
+						t_ps_context *context
+						);
 
 /* ************************************************************************** */
 /*                                                                            */
@@ -61,5 +71,42 @@ t_ps_context	*ps_initialize(
 			return (ps_cleanup(&context), NULL);
 		ft_lstadd_front(&context->a, node);
 	}
+	return (_normalize(context));
+}
+
+static int	_cmp_int(
+				int **a,
+				int **b
+				)
+{
+	return ((**a) - (**b));
+}
+
+static t_ps_context	*_normalize(
+						t_ps_context *context
+						)
+{
+	int		**tmp;
+	size_t	i;
+
+	if (context->count == 0)
+		return (context);
+	tmp = (int **)malloc(context->count * sizeof(int *));
+	if (tmp == NULL)
+		return (ps_cleanup(&context), NULL);
+	i = 0;
+	while (i < context->count)
+	{
+		tmp[i] = &context->values[i];
+		++i;
+	}
+	ft_qsort(tmp, context->count, sizeof(int *), (t_comparator) _cmp_int);
+	i = 0;
+	while (i < context->count)
+	{
+		*(tmp[i]) = i;
+		++i;
+	}
+	free(tmp);
 	return (context);
 }

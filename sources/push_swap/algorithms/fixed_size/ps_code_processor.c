@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ps_push.c                                          :+:      :+:    :+:   */
+/*   ps_code_processor.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amassias <amassias@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/16 14:11:29 by amassias          #+#    #+#             */
-/*   Updated: 2024/01/16 18:43:00 by amassias         ###   ########.fr       */
+/*   Created: 2024/01/18 20:19:22 by amassias          #+#    #+#             */
+/*   Updated: 2024/01/18 23:28:36 by amassias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /**
- * @file ps_push.c
+ * @file ps_code_processor.c
  * @author Antoine Massias (amassias@student.42lehavre.fr)
- * @date 2024-01-16
+ * @date 2024-01-18
  * @copyright Copyright (c) 2024
  */
 
@@ -23,7 +23,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "ps.h"
 
 /* ************************************************************************** */
 /*                                                                            */
@@ -31,10 +31,30 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-static void	_push(
-				t_list **dst_ptr,
-				t_list **src_ptr
+static void	_do_nothing(
+				t_ps_context *context
 				);
+
+/* ************************************************************************** */
+/*                                                                            */
+/* Global variables                                                           */
+/*                                                                            */
+/* ************************************************************************** */
+
+void	(*g_functions[])(t_ps_context *) = {
+[OP_NOP] = _do_nothing,
+[OP_SA] = p_sa,
+[OP_SB] = p_sb,
+[OP_SS] = p_ss,
+[OP_PA] = p_pa,
+[OP_PB] = p_pb,
+[OP_RA] = p_ra,
+[OP_RB] = p_rb,
+[OP_RR] = p_rr,
+[OP_RRA] = p_rra,
+[OP_RRB] = p_rrb,
+[OP_RRR] = p_rrr,
+};
 
 /* ************************************************************************** */
 /*                                                                            */
@@ -42,18 +62,16 @@ static void	_push(
 /*                                                                            */
 /* ************************************************************************** */
 
-void	ps_pa(
-			t_ps_context *ctx
+void	process_code(
+			uint64_t code,
+			t_ps_context *context
 			)
 {
-	_push(&ctx->a, &ctx->b);
-}
-
-void	ps_pb(
-			t_ps_context *ctx
-			)
-{
-	_push(&ctx->b, &ctx->a);
+	while (code)
+	{
+		g_functions[code & 0xF](context);
+		code >>= 4;
+	}
 }
 
 /* ************************************************************************** */
@@ -62,17 +80,9 @@ void	ps_pb(
 /*                                                                            */
 /* ************************************************************************** */
 
-static void	_push(
-				t_list **dst_ptr,
-				t_list **src_ptr
+static void	_do_nothing(
+				t_ps_context *_
 				)
 {
-	t_list	*tmp;
-
-	if (*src_ptr == NULL)
-		return ;
-	tmp = *src_ptr;
-	*src_ptr = (*src_ptr)->next;
-	tmp->next = *dst_ptr;
-	*dst_ptr = tmp;
+	(void) _;
 }
