@@ -6,7 +6,7 @@
 #    By: amassias <amassias@student.42lehavre.fr    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/23 21:43:21 by amassias          #+#    #+#              #
-#    Updated: 2024/01/20 17:43:26 by amassias         ###   ########.fr        #
+#    Updated: 2024/01/20 18:04:31 by amassias         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -139,7 +139,7 @@ norminette:
 	@norminette												\
 		`find $(SRC_DIR) -type f -name \*.c`				\
 		`find $(INC_DIR) -type f -name \*.h`				\
-		| grep -Ev '^Notice: |OK\!$$'						\
+		| grep -Ev '^Notice: |OK\!$$' 2> /dev/null			\
 		&& exit 1 || printf 'Norminette OK!\n' && exit 0
 
 # **************************************************************************** #

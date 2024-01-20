@@ -6,7 +6,7 @@
 /*   By: amassias <amassias@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 14:38:15 by amassias          #+#    #+#             */
-/*   Updated: 2024/01/16 18:14:30 by amassias         ###   ########.fr       */
+/*   Updated: 2024/01/20 18:10:30 by amassias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 #include "push_swap.h"
 #include "utils.h"
 
+#include <limits.h>
 #include <stdlib.h>
 
 /* ************************************************************************** */
@@ -33,6 +34,21 @@
 /* Helper protoypes                                                           */
 /*                                                                            */
 /* ************************************************************************** */
+
+static int			_cmp_int(
+						int **a,
+						int **b
+						);
+
+static bool			_parse_and_check_int(
+						const char *str,
+						int	*res
+						);
+
+static bool			_exists(
+						t_ps_context *context,
+						int value
+						);
 
 static t_ps_context	*_normalize(
 						t_ps_context *context
@@ -49,8 +65,8 @@ t_ps_context	*ps_initialize(
 					)
 {
 	t_ps_context	*context;
-	size_t			i;
 	t_list			*node;
+	size_t			i;
 
 	context = (t_ps_context *)ft_calloc(1, sizeof(t_ps_context));
 	if (context == NULL)
@@ -63,9 +79,9 @@ t_ps_context	*ps_initialize(
 	i = context->count;
 	while (i-- > 0)
 	{
-		if (!is_string_integer(values[i]))
+		if (!_parse_and_check_int(values[i], &context->values[i])
+			|| _exists(context, context->values[i]))
 			return (ps_cleanup(&context), NULL);
-		context->values[i] = ft_atoi(values[i]);
 		node = ft_lstnew(&context->values[i]);
 		if (node == NULL)
 			return (ps_cleanup(&context), NULL);
@@ -74,12 +90,67 @@ t_ps_context	*ps_initialize(
 	return (_normalize(context));
 }
 
+/* ************************************************************************** */
+/*                                                                            */
+/* Helper implementation                                                      */
+/*                                                                            */
+/* ************************************************************************** */
+
 static int	_cmp_int(
 				int **a,
 				int **b
 				)
 {
 	return ((**a) - (**b));
+}
+
+static bool	_parse_and_check_int(
+				const char *str,
+				int	*res
+				)
+{
+	long	value;
+	int		sign;
+
+	value = 0;
+	sign = 1;
+	while (ft_isspace(*str))
+		++str;
+	if (*str == '-' || *str == '+')
+	{
+		if (*str == '-')
+			sign = -sign;
+		++str;
+	}
+	if (!ft_isdigit(*str))
+		return (false);
+	while (ft_isdigit(*str))
+	{
+		value = 10 * value + (*str++) - '0';
+		if (sign * value > INT_MAX || sign * value < INT_MIN)
+			return (false);
+	}
+	while (ft_isspace(*str))
+		++str;
+	*res = (int) sign * value;
+	return (*str == '\0');
+}
+
+static bool	_exists(
+				t_ps_context *context,
+				int value
+				)
+{
+	t_list	*itr;
+
+	itr = context->a;
+	while (itr)
+	{
+		if (*(int *)itr->content == value)
+			return (true);
+		itr = itr->next;
+	}
+	return (false);
 }
 
 static t_ps_context	*_normalize(
