@@ -1,2 +1,10 @@
+# Project
 binaries
 _objects
+
+#VSCode
+.vscode
+
+# Push swap visualizer
+imgui.ini
+push_swap_visualizer

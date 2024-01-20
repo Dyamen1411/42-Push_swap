@@ -6,7 +6,7 @@
 #    By: amassias <amassias@student.42lehavre.fr    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/23 21:43:21 by amassias          #+#    #+#              #
-#    Updated: 2024/01/16 15:31:44 by amassias         ###   ########.fr        #
+#    Updated: 2024/01/20 17:43:26 by amassias         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,6 +61,16 @@ LFLAGS			:=					\
 # **************************************************************************** #
 
 PS_FILES		:=															\
+	algorithms/fixed_size/n2												\
+	algorithms/fixed_size/n3												\
+	algorithms/fixed_size/n4												\
+	algorithms/fixed_size/n5												\
+	algorithms/fixed_size/ps_code_processor									\
+	algorithms/radix/radix													\
+	printed_operations/push													\
+	printed_operations/reverse_rotate										\
+	printed_operations/rotate												\
+	printed_operations/swap													\
 	main																	\
 
 PS_SRCS			:=	$(addprefix $(PS_SRC_DIR)/,$(addsuffix .c,$(PS_FILES)))
@@ -90,8 +100,9 @@ CM_FILES		:=															\
 	context/ps_cleanup														\
 	context/ps_initialize													\
 	operations/ps_push														\
+	operations/ps_rotate													\
 	operations/ps_reverse_rotate											\
-	operations/ps_swap															\
+	operations/ps_swap														\
 	utils/is_string_integer													\
 
 CM_SRCS			:=	$(addprefix $(CM_SRC_DIR)/,$(addsuffix .c,$(CM_FILES)))
