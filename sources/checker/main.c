@@ -6,7 +6,7 @@
 /*   By: amassias <amassias@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 13:01:58 by amassias          #+#    #+#             */
-/*   Updated: 2024/01/22 02:04:20 by amassias         ###   ########.fr       */
+/*   Updated: 2024/01/22 02:25:06 by amassias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ static t_operator	_get_operator(
 		return (g_instructions[OP_RRB]);
 	if (ft_strcmp(operator, "rrs") == 0)
 		return (g_instructions[OP_RRR]);
-	return (g_instructions[OP_NOP]);
+	return (NULL);
 }
 
 static bool	_is_sorted(
@@ -149,15 +149,26 @@ static bool	_is_ok(
 				t_list *instructions
 				)
 {
-	char	*tmp;
+	char		*tmp;
+	t_operator	operator;
+	t_list		*instruction_itr;
 
-	while (instructions)
+	instruction_itr = instructions;
+	while (instruction_itr)
 	{
-		tmp = ft_strchr((const char *)instructions->content, '\n');
+		tmp = ft_strchr((const char *)instruction_itr->content, '\n');
 		if (tmp)
 			*tmp = '\0';
-		_get_operator(instructions->content)(context);
-		instructions = instructions->next;
+		operator = _get_operator(instruction_itr->content);
+		if (operator == NULL)
+		{
+			ft_putstr("Error\n");
+			ft_lstclear(&instructions, free);
+			ps_cleanup(&context);
+			exit(EXIT_FAILURE);
+		}
+		operator(context);
+		instruction_itr = instruction_itr->next;
 	}
 	return (context->b == NULL && _is_sorted(context->a));
 }
