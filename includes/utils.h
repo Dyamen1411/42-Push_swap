@@ -6,7 +6,7 @@
 /*   By: amassias <amassias@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 14:40:47 by amassias          #+#    #+#             */
-/*   Updated: 2024/01/22 01:31:16 by amassias         ###   ########.fr       */
+/*   Updated: 2024/01/22 02:42:10 by amassias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,10 @@
 
 bool	is_string_integer(
 			const char *str
+			);
+
+bool	is_sorted(
+			t_list *list
 			);
 
 void	do_nothing(

@@ -6,7 +6,7 @@
 /*   By: amassias <amassias@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 13:01:58 by amassias          #+#    #+#             */
-/*   Updated: 2024/01/22 02:25:06 by amassias         ###   ########.fr       */
+/*   Updated: 2024/01/22 02:44:57 by amassias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,26 +124,6 @@ static t_operator	_get_operator(
 	return (NULL);
 }
 
-static bool	_is_sorted(
-				t_list *list
-				)
-{
-	int	last;
-
-	if (list == NULL)
-		return (true);
-	last = *(int *)list->content;
-	list = list->next;
-	while (list)
-	{
-		if (last > *(int *)list->content)
-			return (false);
-		last = *(int *)list->content;
-		list = list->next;
-	}
-	return (true);
-}
-
 static bool	_is_ok(
 				t_ps_context *context,
 				t_list *instructions
@@ -170,5 +150,5 @@ static bool	_is_ok(
 		operator(context);
 		instruction_itr = instruction_itr->next;
 	}
-	return (context->b == NULL && _is_sorted(context->a));
+	return (context->b == NULL && is_sorted(context->a));
 }
