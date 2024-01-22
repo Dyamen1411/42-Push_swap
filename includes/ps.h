@@ -6,7 +6,7 @@
 /*   By: amassias <amassias@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 19:18:34 by amassias          #+#    #+#             */
-/*   Updated: 2024/01/18 20:58:36 by amassias         ###   ########.fr       */
+/*   Updated: 2024/01/22 01:32:18 by amassias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,25 +29,6 @@
 # include "push_swap.h"
 
 # include <stdint.h>
-
-/* ************************************************************************** */
-/*                                                                            */
-/* Defines                                                                    */
-/*                                                                            */
-/* ************************************************************************** */
-
-# define OP_NOP 0x0
-# define OP_SA 0x1
-# define OP_SB 0x2
-# define OP_SS 0x3
-# define OP_PA 0x4
-# define OP_PB 0x5
-# define OP_RA 0x6
-# define OP_RB 0x7
-# define OP_RR 0x8
-# define OP_RRA 0x9
-# define OP_RRB 0xA
-# define OP_RRR 0xB
 
 /* ************************************************************************** */
 /*                                                                            */

@@ -6,7 +6,7 @@
 #    By: amassias <amassias@student.42lehavre.fr    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/23 21:43:21 by amassias          #+#    #+#              #
-#    Updated: 2024/01/20 18:04:31 by amassias         ###   ########.fr        #
+#    Updated: 2024/01/22 01:29:51 by amassias         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -103,6 +103,7 @@ CM_FILES		:=															\
 	operations/ps_rotate													\
 	operations/ps_reverse_rotate											\
 	operations/ps_swap														\
+	utils/do_nothing														\
 	utils/is_string_integer													\
 
 CM_SRCS			:=	$(addprefix $(CM_SRC_DIR)/,$(addsuffix .c,$(CM_FILES)))

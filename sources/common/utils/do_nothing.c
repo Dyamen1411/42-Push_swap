@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ps_push.c                                          :+:      :+:    :+:   */
+/*   do_nothing.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amassias <amassias@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/16 14:11:29 by amassias          #+#    #+#             */
-/*   Updated: 2024/01/22 01:13:50 by amassias         ###   ########.fr       */
+/*   Created: 2024/01/22 01:28:50 by amassias          #+#    #+#             */
+/*   Updated: 2024/01/22 01:30:38 by amassias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /**
- * @file ps_push.c
+ * @file do_nothing.c
  * @author Antoine Massias (amassias@student.42lehavre.fr)
- * @date 2024-01-16
+ * @date 2024-01-22
  * @copyright Copyright (c) 2024
  */
 
@@ -27,52 +27,13 @@
 
 /* ************************************************************************** */
 /*                                                                            */
-/* Helper protoypes                                                           */
-/*                                                                            */
-/* ************************************************************************** */
-
-static void	_push(
-				t_list **dst_ptr,
-				t_list **src_ptr
-				);
-
-/* ************************************************************************** */
-/*                                                                            */
 /* Header implementation                                                      */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	ps_pa(
-			t_ps_context *ctx
+void	do_nothing(
+			t_ps_context *_
 			)
 {
-	_push(&ctx->a, &ctx->b);
-}
-
-void	ps_pb(
-			t_ps_context *ctx
-			)
-{
-	_push(&ctx->b, &ctx->a);
-}
-
-/* ************************************************************************** */
-/*                                                                            */
-/* Helper implementation                                                      */
-/*                                                                            */
-/* ************************************************************************** */
-
-static void	_push(
-				t_list **dst_ptr,
-				t_list **src_ptr
-				)
-{
-	t_list	*tmp;
-
-	if (*src_ptr == NULL)
-		return ;
-	tmp = *src_ptr;
-	*src_ptr = (*src_ptr)->next;
-	tmp->next = *dst_ptr;
-	*dst_ptr = tmp;
+	(void)_;
 }
